@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-password}
       MYSQL_DATABASE: ${DB_NAME:-credential_manager}
     ports:
-      - "${DB_PORT:-3306}:3306"
+      - "${DB_PORT:-3310}:3306"
     volumes:
       - mysql-data:/var/lib/mysql
       - ./db_schema.sql:/docker-entrypoint-initdb.d/db_schema.sql
@@ -33,7 +33,7 @@ services:
       - DB_USER=${DB_USER:-root}
       - DB_PASSWORD=${DB_PASSWORD:-password}
       - DB_NAME=${DB_NAME:-credential_manager}
-      - DB_PORT=${DB_PORT:-3306}
+      - DB_PORT=${DB_PORT:-3310}
       - JWT_SECRET=${JWT_SECRET:-your-secret-key-change-in-production}
       - ENCRYPTION_KEY=${ENCRYPTION_KEY:-credential-encryption-key-32chars}
       - ENCRYPTION_IV=${ENCRYPTION_IV:-credential-iv-16c}

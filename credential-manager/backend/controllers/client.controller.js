@@ -1,6 +1,6 @@
 // backend/controllers/client.controller.js
-const { Client } = require('../models/client.model');
-const { ActivityLog } = require('../models/activity.model');
+import { Client } from '../models/client.model';
+import { ActivityLog } from '../models/activity.model';
 
 /**
  * Client Controller
@@ -205,4 +205,4 @@ const clientController = {
   }
 };
 
-module.exports = clientController;
+export default clientController;
