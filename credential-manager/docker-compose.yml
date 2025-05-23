@@ -38,11 +38,11 @@ services:
       - ENCRYPTION_KEY=${ENCRYPTION_KEY:-credential-encryption-key-32chars}
       - ENCRYPTION_IV=${ENCRYPTION_IV:-credential-iv-16c}
       - FRONTEND_URL=${FRONTEND_URL:-http://localhost:3000}
+    # Removing volume mount that's causing ContainerConfig error
+    # volumes:
+    #   - ./backend:/app
     ports:
       - "${PORT:-5000}:5000"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
     networks:
       - app-network
 
@@ -57,10 +57,7 @@ services:
     environment:
       - REACT_APP_API_URL=http://localhost:${PORT:-5000}/api
     ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - "3000:80"
     networks:
       - app-network
 

@@ -1,18 +1,21 @@
 # frontend/Dockerfile
-FROM node:16-alpine
+# Build stage
+FROM node:16-alpine AS build
 
-# Create app directory
+
 WORKDIR /app
 
-# Install app dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy app source code
 COPY . .
+RUN npm run build
 
-# Expose port
-EXPOSE 3000
+# Production stage
+FROM nginx:alpine
 
-# Start the frontend development server
-CMD ["npm", "start"]
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

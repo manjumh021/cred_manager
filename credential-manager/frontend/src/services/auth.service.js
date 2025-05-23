@@ -3,6 +3,13 @@ import axios from 'axios';
 
 const API_URL = '/api/auth';
 
+export const getAuthHeader = () => {
+  const token = localStorage.getItem('token');
+  return {
+    Authorization: token ? `Bearer ${token}` : ''
+  };
+};
+
 const authService = {
   register: (userData) => {
     return axios.post(`${API_URL}/register`, userData);

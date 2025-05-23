@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import credentialService from '../services/credential.service';
 import clientService from '../services/client.service';
 
 const CredentialDetails = () => {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [credential, setCredential] = useState({
     client_id: '',
     platform_id: '',
@@ -102,7 +102,7 @@ const CredentialDetails = () => {
       } else {
         await credentialService.updateCredential(id, credential);
       }
-      history.push('/credentials');
+      navigate('/credentials');
     } catch (err) {
       setError('Failed to save credential');
     } finally {
@@ -209,7 +209,7 @@ const CredentialDetails = () => {
           ) : (
             <button type="button" className="btn btn-warning" onClick={() => setIsEditMode(true)}>Edit</button>
           )}
-          <button type="button" className="btn btn-secondary ml-2" onClick={() => history.push('/credentials')}>Back to List</button>
+          <button type="button" className="btn btn-secondary ml-2" onClick={() => navigate('/credentials')}>Back to List</button>
         </div>
       </form>
     </div>

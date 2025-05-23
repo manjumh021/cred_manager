@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import clientService from '../services/client.service';
 
 const ClientDetails = () => {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [client, setClient] = useState({
     name: '',
     contact_person: '',
@@ -56,7 +56,7 @@ const ClientDetails = () => {
       } else {
         await clientService.updateClient(id, client);
       }
-      history.push('/clients');
+      navigate('/clients');
     } catch (err) {
       setError('Failed to save client');
     } finally {
@@ -110,7 +110,7 @@ const ClientDetails = () => {
           ) : (
             <button type="button" className="btn btn-warning" onClick={() => setIsEditMode(true)}>Edit</button>
           )}
-          <button type="button" className="btn btn-secondary ml-2" onClick={() => history.push('/clients')}>Back to List</button>
+          <button type="button" className="btn btn-secondary ml-2" onClick={() => navigate('/clients')}>Back to List</button>
         </div>
       </form>
     </div>
