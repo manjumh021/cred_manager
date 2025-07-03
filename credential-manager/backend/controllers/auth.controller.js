@@ -1,6 +1,7 @@
 // backend/controllers/auth.controller.js
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
 const User = require('../models/user.model');
 const { ActivityLog } = require('../models/activity.model');
 const authConfig = require('../config/auth.config');
@@ -22,7 +23,7 @@ const authController = {
       // Check if username or email already exists
       const existingUser = await User.findOne({
         where: {
-          [sequelize.Op.or]: [
+          [Op.or]: [
             { username },
             { email }
           ]

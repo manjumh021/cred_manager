@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const clientController = require('../controllers/client.controller');
+
+console.log('clientController:', clientController);
+console.log('createClient:', clientController.createClient);
 const { authenticate, authorize } = require('../middleware/auth.middleware');
 const { check } = require('express-validator');
 const validators = require('../middleware/validators');
@@ -17,9 +20,9 @@ router.post(
   authenticate,
   [
     check('name', 'Client name is required').notEmpty(),
-    check('email', 'Please include a valid email').optional().isEmail(),
-    validators.validate
+    check('email', 'Please include a valid email').optional().isEmail()
   ],
+  validators.validate,
   clientController.createClient
 );
 
@@ -34,9 +37,9 @@ router.put(
   '/:id',
   authenticate,
   [
-    check('email', 'Please include a valid email').optional().isEmail(),
-    validators.validate
+    check('email', 'Please include a valid email').optional().isEmail()
   ],
+  validators.validate,
   clientController.updateClient
 );
 
